@@ -1,0 +1,283 @@
+create table if not exists batch_11.kelompok_3 (
+id int primary key,
+nama_depan varchar(255) not null,
+nama_belakang varchar(255) not null,
+alamat_email varchar(255) not null,
+link_linkedin varchar(255) not null,
+pekerjaan_impian varchar(255) not null,
+alasan_mengikuti_bootcamp_datascience varchar(255) not null
+)
+
+alter table batch_11.kelompok_3
+rename to "a1"
+insert into batch_11.omicron_3 values
+(3, 'Fajar', 'Achmad',
+'achmadfajar75@gmail.com',
+'https://www.linkedin.com/in/fajar-achmad-755945111',
+'Praktisi Pertanian Organik',
+'Ingin mengerti cara olah data dan menjadi DataScientist')
+
+
+select ....
+from ...
+where ...
+group by ...
+having ...
+order by 
+limit 
+
+
+select 'fajar'
+select current_timestamp 
+
+select *
+from datasource.order_details_csv
+
+select *
+from datasource.order_lists_csv
+
+select 
+order_id as "ID untuk Order", 
+sales as "Total Sales",
+profit as "Profit",
+quantity as "Jumlah Pembelian",
+category as "Kategori",
+sub_category as "Sub Kategori",
+cost "Biaya"
+-- total_cost,
+-- total_profit
+
+from datasource.order_details_csv
+
+select distinct category 
+from datasource.order_details_csv
+
+select distinct char_length ('US-' || order_id)
+from datasource.order_details_csv
+
+select lower ('US-' || order_id)
+from datasource.order_details_csv
+
+select position ('AZ' in order_id)
+from datasource.order_details_csv
+
+select substring('Indonesia' from 3 for 4)
+
+select substring(order_id from position ('AZ' in order_id) for 2)
+from datasource.order_details_csv
+
+select distinct substring(order_id from position ('AZ' in order_id) for 2)
+from datasource.order_details_csv
+
+select distinct substring(order_id from 1 for 2)
+from datasource.order_details_csv
+
+select sum(total_profit), max( total_profit ), min(total_profit) ,avg( total_profit ), count( total_profit )
+from datasource.order_details_csv
+
+select count (*)
+from datasource.order_details_csv
+
+select count (distinct sub_category)
+from datasource.order_details_csv
+
+select percentile_cont(0.5) within group (order by total_profit)
+from datasource.order_details_csv 
+
+select distinct category 
+from datasource.order_details_csv
+
+select 
+case
+when (category) = 'Furniture' then 'Hahaha'
+when lower (category) = 'office supplies' then 'Hehehe'
+when lower (category) = 'technology' then 'Hihihi'
+end 
+from datasource.order_details_csv
+
+select 
+order_id as "ID untuk Order", 
+category as "Kategori",
+sub_category as "Sub Kategori",
+quantity as "Jumlah Pembelian",
+sales as "Total Sales",
+profit as "Profit"
+from datasource.order_details_csv
+where category = 'Furniture'
+
+select 
+order_id as "ID untuk Order", 
+category as "Kategori",
+sub_category as "Sub Kategori",
+quantity as "Jumlah Pembelian",
+sales as "Total Sales",
+profit as "Profit"
+from datasource.order_details_csv
+where category = 'Furniture' and sub_category = 'Chairs'
+
+select 
+order_id as "ID untuk Order", 
+category as "Kategori",
+sub_category as "Sub Kategori",
+quantity as "Jumlah Pembelian",
+sales as "Total Sales",
+profit as "Profit"
+from datasource.order_details_csv
+where category = 'Furniture' and sub_category in ('Chairs', 'Tables')
+
+atau bisa juga
+
+select 
+order_id as "ID untuk Order", 
+category as "Kategori",
+sub_category as "Sub Kategori",
+quantity as "Jumlah Pembelian",
+sales as "Total Sales",
+profit as "Profit"
+from datasource.order_details_csv
+where category = 'Furniture' and (sub_category = 'Chairs' or sub_category = 'Tables')
+
+select 
+order_id as "ID untuk Order", 
+category as "Kategori",
+sub_category as "Sub Kategori",
+quantity as "Jumlah Pembelian",
+sales as "Total Sales",
+profit as "Profit"
+from datasource.order_details_csv
+where category = 'Furniture' and (sub_category like 'Chairs' or sub_category = 'Tables')
+
+% : jumlah karakter sebelum / setelah tidak diketahui
+_ : jumlah karakter sebelum / setelah diketahui
+
+select 
+order_id as "ID untuk Order", 
+category as "Kategori",
+sub_category as "Sub Kategori",
+quantity as "Jumlah Pembelian",
+sales as "Total Sales",
+profit as "Profit"
+from datasource.order_details_csv
+where category = 'Furniture' and 
+(
+sub_category like '__hai' or 
+sub_category = 'Tables'
+)
+
+select 
+order_id as "ID untuk Order", 
+category as "Kategori",
+sub_category as "Sub Kategori",
+quantity as "Jumlah Pembelian",
+sales as "Total Sales",
+profit as "Profit"
+from datasource.order_details_csv
+where
+category = 'Furniture' and 
+(
+sub_category not like 'Chairs' or 
+sub_category != 'Tables'
+)
+
+select 
+order_id as "ID untuk Order", 
+category as "Kategori",
+sub_category as "Sub Kategori",
+quantity as "Jumlah Pembelian",
+sales as "Total Sales",
+profit as "Profit"
+from datasource.order_details_csv
+where 
+quantity >= 2 and 
+quantity <= 3 and 
+sales>= 30 and
+sales<= 100
+
+select 
+category as "Kategori",
+sub_category as "Sub Kategori",
+sum (quantity) as "Jumlah Pembelian",
+sum (sales ) as "Total Sales",
+sum (profit ) as "Profit"
+from datasource.order_details_csv
+where 
+quantity >= 2 and 
+quantity <= 3 and 
+sales>= 30 and
+sales<= 100
+group by sub_category, category  
+
+select 
+category as "Kategori",
+sub_category as "Sub Kategori",
+sum (quantity) as "Jumlah Pembelian",
+sum (sales ) as "Total Sales",
+sum (profit ) as "Profit"
+from datasource.order_details_csv
+where 
+quantity >= 2 and 
+quantity <= 3 and 
+sales>= 30 and
+sales<= 100
+group by 1,2
+
+select 
+category as "Kategori",
+sub_category as "Sub Kategori",
+sum (quantity) as "Jumlah Pembelian",
+sum (sales) as "Total Sales",
+sum (profit) as "Profit"
+from datasource.order_details_csv
+where 
+quantity >= 2 and 
+quantity <= 3 and 
+sales >= 30 and
+sales <= 100
+group by 1,2
+having sum (quantity) >= 200 and sum (sales) <= 10000
+order by category desc , sub_category desc
+
+select 
+category as "Kategori",
+sub_category as "Sub Kategori",
+sum (quantity) as "Jumlah Pembelian",
+sum (sales) as "Total Sales",
+sum (profit) as "Profit"
+from datasource.order_details_csv
+where 
+quantity >= 2 and 
+quantity <= 3 and 
+sales >= 30 and
+sales <= 100
+group by 1,2
+having sum (quantity) >= 200 and sum (sales) <= 10000
+order by category asc ,
+case 
+when sub_category = 'Furnishings' then 1
+when sub_category = 'Supplies' then 2
+when sub_category = 'Fasteners' then 3
+else 4
+end 
+
+select 
+category as "Kategori",
+sub_category as "Sub Kategori",
+sum (quantity) as "Jumlah Pembelian",
+sum (sales) as "Total Sales",
+sum (profit) as "Profit"
+from datasource.order_details_csv
+where 
+quantity >= 2 and 
+quantity <= 3 and 
+sales >= 30 and
+sales <= 100
+group by 1,2
+having sum (quantity) >= 200 and sum (sales) <= 10000
+order by category asc ,
+case 
+when sub_category = 'Furnishings' then 1
+when sub_category = 'Supplies' then 2
+when sub_category = 'Fasteners' then 3
+else 4
+end 
+limit 3
